@@ -1,0 +1,54 @@
+<!--
+  Generated template for the ChatPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>CHAT</ion-title>
+  </ion-navbar>
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="menu">
+      <ion-segment-button value="messages">
+        <ion-icon name="chatbubbles"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="users">
+        <ion-icon name="people"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #content padding>
+    <ion-infinite-scroll threshold="1%" (ionInfinite)="doInfinite($event)" *ngIf="page <= totalPage" position="top">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="กำลังโหลดข้อมูล..."
+        >
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+  <ion-list >
+
+      <ion-item *ngFor="let message of messages" >
+        <div class="msg-detail">
+            <div class="msg-info">
+              <h4>{{ message.id }}. {{ message.user.name }}</h4>
+            </div>
+            <div class="msg-content">
+              <span class="triangle"></span>
+              <p>{{ message.msg }}</p>
+            </div>
+          </div>
+        </ion-item>
+  </ion-list>
+
+  <!-- <ion-list *ngSwitchCase="'users'">
+    <h2>Users</h2>
+    <ion-item>
+      <ion-row *ngFor="let user of users">
+          <p>{{ user.name }}</p>
+      </ion-row>
+    </ion-item>
+  </ion-list> -->
+</ion-content>
